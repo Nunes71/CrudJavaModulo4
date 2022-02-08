@@ -1,0 +1,45 @@
+package br.com.goviagens.dao;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+
+import br.com.goviagens.factory.ConnectionFactoryGoViagens;
+import br.com.goviagens.model.Promocao;
+
+public class promocaodao {
+	public void save (Promocao promocao) {
+		String sql = "INSERT INTO Promocao(Nome, Valor, DestinosID)" + "VALUES(?, ?, ?)";
+		
+		Connection conn = null;
+		PreparedStatement pstm = null;
+		
+		try {
+			
+			conn = ConnectionFactoryGoViagens.createConnectionSQLServer();
+			
+			pstm = conn.prepareStatement(sql);
+			
+			pstm.setString (1 , promocao.getNome());
+			pstm.setInt (2 , promocao.getValor());
+			pstm.setInt (3 , promocao.getDestinosID());
+			pstm.execute();
+			
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				if (pstm != null ) {
+					pstm.close();
+				}
+				if (conn != null) {
+					conn.close();
+				}
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+			
+		}
+		
+	}
+
+}

@@ -1,0 +1,11 @@
+package br.com.goviagens.factory;
+
+public class Destinos {
+	
+	private int id;
+	private String origem;
+	private String chegada;
+	private String companhia;
+	private String classe;
+	
+}
